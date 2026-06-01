@@ -55,8 +55,7 @@ def combine_f1_weather():
 
     final_df = races_df.merge(
         weather_df,
-        left_on=["race_key", "date"],
-        right_on=["race_key", "weather_date"],
+        on=["season", "round", "race_key"],
         how="inner",
     )
 
@@ -64,7 +63,7 @@ def combine_f1_weather():
         [
             "season",
             "round",
-            "race_name",
+            "race_name_x",
             "circuit_name",
             "date",
             "locality",
@@ -79,12 +78,18 @@ def combine_f1_weather():
         ]
     ]
 
+    final_df = final_df.rename(
+        columns={
+            "race_name_x": "race_name"
+        }
+    )
+
     output_file = os.path.join(output_dir, "race_weather.parquet")
     final_df.to_parquet(output_file, index=False)
 
     print(f"Fichier usage créé : {output_file}")
-    print(final_df.head())
     print(f"Nombre de lignes fusionnées : {len(final_df)}")
+    print(final_df.head())
 
 
 if __name__ == "__main__":

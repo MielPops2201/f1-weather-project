@@ -9,13 +9,43 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 DATALAKE_ROOT = os.path.join(PROJECT_ROOT, "data")
 
 
+def safe_avg(values):
+    clean_values = [v for v in values if v is not None]
+    if not clean_values:
+        return None
+    return sum(clean_values) / len(clean_values)
+
+
+def safe_sum(values):
+    clean_values = [v for v in values if v is not None]
+    if not clean_values:
+        return None
+    return sum(clean_values)
+
+
+def safe_min(values):
+    clean_values = [v for v in values if v is not None]
+    if not clean_values:
+        return None
+    return min(clean_values)
+
+
+def safe_max(values):
+    clean_values = [v for v in values if v is not None]
+    if not clean_values:
+        return None
+    return max(clean_values)
+
+
 def format_weather():
     current_day = date.today().strftime("%Y%m%d")
 
-    raw_weather_dir = os.path.join(
+    input_dir = os.path.join(
         DATALAKE_ROOT,
         "raw",
         "open_meteo",
+        "weather",
+        current_day,
     )
 
     output_dir = os.path.join(
@@ -30,32 +60,34 @@ def format_weather():
 
     rows = []
 
-    for race_folder in os.listdir(raw_weather_dir):
-        race_path = os.path.join(raw_weather_dir, race_folder, current_day)
-        weather_file = os.path.join(race_path, "weather.json")
-
-        if not os.path.exists(weather_file):
+    for file_name in os.listdir(input_dir):
+        if not file_name.endswith(".json"):
             continue
 
-        with open(weather_file, "r", encoding="utf-8") as file:
+        input_file = os.path.join(input_dir, file_name)
+
+        with open(input_file, "r", encoding="utf-8") as file:
             data = json.load(file)
 
-        hourly = data["hourly"]
+        metadata = data["metadata"]
+        hourly = data["weather"]["hourly"]
 
         temperature = hourly["temperature_2m"]
         precipitation = hourly["precipitation"]
         wind_speed = hourly["wind_speed_10m"]
-        times = hourly["time"]
 
         rows.append(
             {
-                "race_key": race_folder,
-                "weather_date": times[0].split("T")[0],
-                "avg_temperature": sum(temperature) / len(temperature),
-                "min_temperature": min(temperature),
-                "max_temperature": max(temperature),
-                "total_precipitation": sum(precipitation),
-                "max_wind_speed": max(wind_speed),
+                "season": metadata["season"],
+                "round": metadata["round"],
+                "race_key": metadata["race_key"],
+                "race_name": metadata["race_name"],
+                "weather_date": metadata["race_date"],
+                "avg_temperature": safe_avg(temperature),
+                "min_temperature": safe_min(temperature),
+                "max_temperature": safe_max(temperature),
+                "total_precipitation": safe_sum(precipitation),
+                "max_wind_speed": safe_max(wind_speed),
             }
         )
 
@@ -65,6 +97,7 @@ def format_weather():
     df.to_parquet(output_file, index=False)
 
     print(f"Fichier météo formatted créé : {output_file}")
+    print(f"Nombre de lignes météo : {len(df)}")
     print(df.head())
 
 
