@@ -1,0 +1,24 @@
+circuit_id,race_date,latitude,longitude,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant,weathercode,race_name,round,season,circuit_name
+bahrain,2024-03-02,26.0325,50.5106,21.2,12.7,0.0,14.8,332,3,Bahrain Grand Prix,1,2024,Bahrain International Circuit
+jeddah,2024-03-09,21.6322,39.1044,29.2,18.3,0.0,28.6,346,0,Saudi Arabian Grand Prix,2,2024,Jeddah Corniche Circuit
+albert_park,2024-03-24,-37.8497,144.968,21.4,12.1,0.0,20.4,268,3,Australian Grand Prix,3,2024,Albert Park Circuit
+suzuka,2024-04-07,34.8431,136.5407,21.2,12.4,0.3,12.3,53,51,Japanese Grand Prix,4,2024,Suzuka Circuit
+shanghai,2024-04-21,31.3389,121.2198,20.2,13.6,1.7,11.3,42,51,Chinese Grand Prix,5,2024,Shanghai International Circuit
+miami,2024-05-05,25.9581,-80.2389,28.8,22.1,0.3,21.1,109,51,Miami Grand Prix,6,2024,Miami International Autodrome
+imola,2024-05-19,44.3439,11.7167,23.7,12.2,0.2,10.4,99,51,Emilia Romagna Grand Prix,7,2024,Autodromo Enzo e Dino Ferrari
+monaco,2024-05-26,43.7347,7.4208,20.8,14.4,0.0,8.5,165,3,Monaco Grand Prix,8,2024,Circuit de Monaco
+villeneuve,2024-06-09,45.5,-73.5228,19.2,14.4,4.4,25.6,249,61,Canadian Grand Prix,9,2024,Circuit Gilles Villeneuve
+catalunya,2024-06-23,41.57,2.2611,22.1,18.0,2.8,17.5,199,53,Spanish Grand Prix,10,2024,Circuit de Barcelona-Catalunya
+red_bull_ring,2024-06-30,47.2197,14.7647,29.0,16.7,0.0,13.8,234,3,Austrian Grand Prix,11,2024,Red Bull Ring
+silverstone,2024-07-07,52.0786,-1.0169,16.3,9.2,2.0,20.9,235,53,British Grand Prix,12,2024,Silverstone Circuit
+hungaroring,2024-07-21,47.5789,19.2486,28.5,19.8,0.2,10.9,241,51,Hungarian Grand Prix,13,2024,Hungaroring
+spa,2024-07-28,50.4372,5.9714,19.8,12.0,0.0,13.9,336,3,Belgian Grand Prix,14,2024,Circuit de Spa-Francorchamps
+zandvoort,2024-08-25,52.3888,4.5408,18.3,15.3,5.6,35.4,245,63,Dutch Grand Prix,15,2024,Circuit Zandvoort
+monza,2024-09-01,45.6156,9.2811,30.8,20.5,19.1,21.4,9,65,Italian Grand Prix,16,2024,Autodromo Nazionale Monza
+baku,2024-09-15,40.3725,49.8533,26.6,18.0,0.0,25.9,9,3,Azerbaijan Grand Prix,17,2024,Baku City Circuit
+marina_bay,2024-09-22,1.2914,103.8639,32.2,25.6,0.0,16.3,114,3,Singapore Grand Prix,18,2024,Marina Bay Street Circuit
+americas,2024-10-20,30.1328,-97.6411,29.4,16.2,0.0,15.5,85,0,United States Grand Prix,19,2024,Circuit of The Americas
+rodriguez,2024-10-27,19.4042,-99.0907,20.9,11.5,1.8,21.8,334,61,Mexico City Grand Prix,20,2024,Autodromo Hermanos Rodriguez
+interlagos,2024-11-03,-23.7036,-46.6997,21.9,19.4,16.6,15.2,85,63,São Paulo Grand Prix,21,2024,Autodromo Jose Carlos Pace
+losail,2024-12-01,25.49,51.4542,23.1,17.2,0.0,28.6,308,0,Qatar Grand Prix,23,2024,Losail International Circuit
+yas_marina,2024-12-08,24.4672,54.6031,30.0,18.1,0.0,16.3,52,0,Abu Dhabi Grand Prix,24,2024,Yas Marina Circuit
