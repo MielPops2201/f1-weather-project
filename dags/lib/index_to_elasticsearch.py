@@ -8,7 +8,7 @@ import requests
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 DATALAKE_ROOT = os.path.join(PROJECT_ROOT, "data")
 
-ELASTICSEARCH_URL = os.getenv("ELASTICSEARCH_URL", "http://localhost:9200")
+ELASTICSEARCH_URL = os.getenv("ELASTICSEARCH_URL", "http://elasticsearch:9200")
 INDEX_NAME = "f1_weather_race"
 
 

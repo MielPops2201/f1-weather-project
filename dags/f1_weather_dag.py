@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from lib.index_to_elasticsearch import index_to_elasticsearch
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -53,4 +54,9 @@ with DAG(
         python_callable=combine_f1_weather,
     )
 
-    fetch_races_task >> format_races_task >> fetch_weather_task >> format_weather_task >> combine_task
+    index_task = PythonOperator(
+        task_id="index_to_elasticsearch",
+        python_callable=index_to_elasticsearch,
+    )
+
+    fetch_races_task >> format_races_task >> fetch_weather_task >> format_weather_task >> combine_task >> index_task
