@@ -9,6 +9,10 @@ from lib.f1_formatter import format_races
 from lib.weather_from_races import fetch_weather_from_races
 from lib.weather_formatter import format_weather
 from lib.combine_f1_weather import combine_f1_weather
+from lib.f1_results_fetcher import fetch_results_from_races
+from lib.f1_results_formatter import format_results
+from lib.combine_driver_weather import combine_driver_weather
+from lib.index_driver_weather_to_elasticsearch import index_driver_weather_to_elasticsearch
 
 
 default_args = {
@@ -59,4 +63,30 @@ with DAG(
         python_callable=index_to_elasticsearch,
     )
 
-    fetch_races_task >> format_races_task >> fetch_weather_task >> format_weather_task >> combine_task >> index_task
+    fetch_results_task = PythonOperator(
+        task_id="fetch_results_from_races",
+        python_callable=fetch_results_from_races,
+    )
+
+    format_results_task = PythonOperator(
+        task_id="format_results",
+        python_callable=format_results,
+    )
+
+    combine_driver_weather_task = PythonOperator(
+        task_id="combine_driver_weather",
+        python_callable=combine_driver_weather,
+    )
+
+    index_driver_weather_task = PythonOperator(
+        task_id="index_driver_weather_to_elasticsearch",
+        python_callable=index_driver_weather_to_elasticsearch,
+    )
+
+    fetch_races_task >> format_races_task
+
+    format_races_task >> fetch_weather_task >> format_weather_task >> combine_task >> index_task
+
+    format_races_task >> fetch_results_task >> format_results_task
+
+    [combine_task, format_results_task] >> combine_driver_weather_task >> index_driver_weather_task
